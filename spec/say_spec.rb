@@ -1,10 +1,5 @@
 require 'say'
 
-def english (n)
-  subject = Say.new(n)
-  subject.in_english
-end
-
 RSpec.describe Say do
   [ [              0, "zero"],
     [              1, "one"],
