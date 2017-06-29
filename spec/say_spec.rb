@@ -1,52 +1,42 @@
 require 'say'
 
 RSpec.describe Say do
-  MINIMUM = 0
-  MAXIMUM = 999_999_999_999
   let(:number) { double("number") }
   let(:say) { Say.new(number) }
 
-  describe "#in_english" do
-    context 'one under maximum' do
-      let(:number) { -1 }
-      subject { say.in_english }
-      it { expect(subject).to eq("minus one") }
+  describe '#in_english' do
+    subject { say.in_english }
+
+    context 'boundary conditions' do
+      MINIMUM = 0
+      MINIMUM_IN_ENGLISH = 'zero'
+      MAXIMUM = 999_999_999_999
+      MAXIMUM_IN_ENGLISH = 'nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine'
+
+      context 'below minimum' do
+        let(:number) { MINIMUM-1 }
+        it { expect { subject }.to raise_error(ArgumentError) }
+      end
+      context 'minimum' do
+        let(:number) { MINIMUM }
+        it { expect { subject }.to_not raise_error }
+        it { expect(subject).to eq(MINIMUM_IN_ENGLISH) }
+      end
+      context 'maximum' do
+        let(:number) { MAXIMUM }
+        it { expect { subject }.to_not raise_error }
+        it { expect(subject).to eq(MAXIMUM_IN_ENGLISH) }
+      end
+      context 'above maximum' do
+        let(:number) { MAXIMUM+1 }
+        it { expect { subject }.to raise_error(ArgumentError) }
+      end
     end
 
-    context 'one over maximum' do
-      let(:number) { -1 }
-      subject { say.in_english }
-      it { expect(subject).to eq("minus one") }
-    end
-
-    context 'min' do
-      let(:number) { 0 }
-      subject { say.in_english }
-      it { expect(subject).to eq("zero") }
-    end
-
-    context 'max' do
-      let(:number) { 999_999_999_999 }
-      subject { say.in_english }
-      it { expect(subject).to eq("nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine") }
-    end
-
-    context 'zero' do
-      let(:number) { 0 }
-      subject { say.in_english }
-      it { expect(subject).to eq('zero') }
-    end
-
-    context 'one' do
-      let(:number) { 1 }
-      subject { say.in_english }
-      it { expect(subject).to eq('one') }
-    end
-
-    context 'two' do
-      let(:number) { 2 }
-      subject { say.in_english }
-      it { expect(subject).to eq('two') }
+    context 'ones' do
+      context('zero') { let(:number) { 0 }; it { expect(subject).to eq('zero') } }
+      context('one') { let(:number) { 1 }; it { expect(subject).to eq('one') } }
+      context('two') { let(:number) { 2 }; it { expect(subject).to eq('two') } }
     end
   end
 end
