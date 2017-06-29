@@ -7,7 +7,7 @@ RSpec.describe Say do
     context 'zero' do
       let(:number) { 0 }
       subject { say.in_english }
-        it { expect(subject).to eq('zero') }
+      it { expect(subject).to eq('zero') }
     end
   end
 end
