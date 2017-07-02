@@ -29,7 +29,7 @@ class MyClass
   ]
 
   POWERS_OF_THREE_IN_ENGLISH = [
-      '',
+      'unit',
       'thousand',
       'million',
       'billion'
@@ -117,6 +117,11 @@ class MyClass
       rvalue << [POWERS_OF_THREE_IN_ENGLISH[index], triplet_in_english(triplet)]
     end
     rvalue
+    rrvalue = []
+    (rvalue.size).downto(1) do |index|
+      rrvalue << [rvalue[index-1][1].reverse,rvalue[index-1][0]]
+    end
+    rrvalue.join(' ')
   end
 
 end
