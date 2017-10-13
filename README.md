@@ -98,3 +98,4 @@ A variation on JavaRanch CattleDrive, exercise 4a [http://www.javaranch.com/say.
 ## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
 
+## Attribution - This is borrowed verbatim from Exercism under the MIT license: [http://exercism.io/exercises/ruby/say/readme](http://exercism.io/exercises/ruby/say/readme)
